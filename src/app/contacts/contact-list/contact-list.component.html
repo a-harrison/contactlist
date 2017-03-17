@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="cold-md-5">
+    <h2>Contacts</h2>
+    <ul class="list-group">
+      <li class="list-group-item"
+	  *ngFor="let contact of contacts"
+	  (click)="selectcContact(contact)"
+	  [class.active]="contact === selectedContact">
+	{{contact.name}}
+      </li>
+    </ul>
+    <button class="btn btn-warning" (click)="createNewContact()">New</button>
+  </div>
+  <div class="col-md-5 cold-md-offset-2">
+    <contact-details
+       [contact]="selectedContact"
+       [createHandler]="addContact"
+       [updateHandler]="updateContact"
+       [deleteHandler]="deleteContact">
+    </contact-details>
+</div>
