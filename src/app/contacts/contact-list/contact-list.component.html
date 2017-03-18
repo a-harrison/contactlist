@@ -4,7 +4,7 @@
     <ul class="list-group">
       <li class="list-group-item"
 	  *ngFor="let contact of contacts"
-	  (click)="selectcContact(contact)"
+	  (click)="selectContact(contact)"
 	  [class.active]="contact === selectedContact">
 	{{contact.name}}
       </li>

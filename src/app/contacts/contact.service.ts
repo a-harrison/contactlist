@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ContactService {
-       private contactsUrl = '/api/contacts';
+       private contactsUrl = 'http://localhost:8888/api/contacts';
 
        constructor (private http: Http) {}
 
