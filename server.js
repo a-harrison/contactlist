@@ -1,7 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
+var contactService = require('./ContactService.js');
 
 var CONTACTS_COLLECTION = "contacts";
 
@@ -17,22 +16,16 @@ var db;
 // Load local config
 var config = require("./config/app.js");
 
-// Connect to the database before the app server.
-mongodb.MongoClient.connect(process.env.MONGODB_URI || config.MONGODB_URI, function(err, database) {
+contactService.start({}, function(err) {
     if(err) {
-	console.log(err);
-	process.exit(1);
+	contactService.logError("Error starting Contact Service: " + err);
+    } else {
+	contactService.logInfo("Contact Service started.");
+
+	// Initialize the express app.
+	var server = app.listen(process.env.PORT || 8080, function() {
+	    var port = server.address().port;
+	    console.log("App now running on port ", port);
+	});	
     }
-
-    // Save the db object from the callback for reuse.
-    db = database;
-    console.log("Successfully connected.");
-
-    // Initialize the app.
-    var server = app.listen(process.env.PORT || 8080, function() {
-	var port = server.address().port;
-	console.log("App now running on port ", port);
-    });
-
-    // ROUTES BELOW
 })
