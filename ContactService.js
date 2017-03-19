@@ -50,7 +50,11 @@ var contactService= o({
 					      .findOne({ "_id" : new ObjectID(req.params._id) }))
 		    },
 		    // POST /api/contacts/:_id - Update contact by _id
-		    post: function(req) {
+		    put: function(req) {
+			var updatedContact = req.body;
+			// _id must remain of type ObjectID
+			updatedContact._id = new ObjectID(req.body._id)
+			
 			return JSON.stringify(this.getService().db.getCollection('contacts')
 					       .findOneAndUpdate({ "_id" : new ObjectID(req.params._id) }, req.body))
 		    },
