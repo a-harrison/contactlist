@@ -51,13 +51,15 @@ var contactService= o({
 		    },
 		    // POST /api/contacts/:_id - Update contact by _id
 		    post: function(req) {
-			return JSON.stringifty(this.getService().db.getCollection('contacts')
+			return JSON.stringify(this.getService().db.getCollection('contacts')
 					       .findOneAndUpdate({ "_id" : new ObjectID(req.params._id) }, req.body))
 		    },
 		    // DELETE /api/contacts/:_id - Delete contact by _id 
 		    delete: function(req) { 
-			return JSON.stringify(this.getService().db.getCollection('contacts')
-					      .findOneAndDelete({ "_id" : new ObjectID(req.params._id) }))
+			var resp = this.getService().db.getCollection('contacts')
+			    .findOneAndDelete({ "_id" : new ObjectID(req.params._id) })
+
+			return JSON.stringify(resp.value._id)
 		    }
 		})
 	    }
