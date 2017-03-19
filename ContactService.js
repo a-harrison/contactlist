@@ -35,30 +35,29 @@ var contactService= o({
 		    },
 		    // GET /api/contacts - Find all contacts 
 		    get: function(req) {
-			return this.getService().db.getCollection('contacts').find().toArray();
+			return JSON.stringify(this.getService().db.getCollection('contacts').find().toArray())
 		    },
 		    // POST /api/contacts - Post a contact 
 		    post: function(req) {
-			console.log(req.body)
-			return this.getService().db.getCollection('contacts').insertObject(req.body)
+			return JSON.stringify(this.getService().db.getCollection('contacts').insertObject(req.body))
 		    },
 		}),
 		"contacts/:_id" : o({
 		    _type: carbon.carbond.Endpoint, 
 		    // GET /api/contacts/:_id - Find contact by _id
 		    get: function(req) {
-			return this.getService().db.getCollection('contacts')
-			    .findOne({ "_id" : new ObjectID(req.params._id) })
+			return JSON.stringify(this.getService().db.getCollection('contacts')
+					      .findOne({ "_id" : new ObjectID(req.params._id) }))
 		    },
 		    // POST /api/contacts/:_id - Update contact by _id
 		    post: function(req) {
-			return this.getService().db.getCollection('contacts')
-			    .findOneAndUpdate({ "_id" : new ObjectID(req.params._id) }, req.body)
+			return JSON.stringifty(this.getService().db.getCollection('contacts')
+					       .findOneAndUpdate({ "_id" : new ObjectID(req.params._id) }, req.body))
 		    },
 		    // DELETE /api/contacts/:_id - Delete contact by _id 
 		    delete: function(req) { 
-			return this.getService().db.getCollection('contacts')
-			    .findOneAndDelete({ "_id" : new ObjectID(req.params._id) })
+			return JSON.stringify(this.getService().db.getCollection('contacts')
+					      .findOneAndDelete({ "_id" : new ObjectID(req.params._id) }))
 		    }
 		})
 	    }
