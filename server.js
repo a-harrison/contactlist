@@ -17,15 +17,15 @@ var db;
 var config = require("./config/app.js");
 
 contactService.start({}, function(err) {
-    if(err) {
-	contactService.logError("Error starting Contact Service: " + err);
-    } else {
-	contactService.logInfo("Contact Service started.");
+  if(err) {
+    contactService.logError("Error starting Contact Service: " + err);
+  } else {
+    contactService.logInfo("Contact Service started.");
 
-	// Initialize the express app.
-	var server = app.listen(process.env.PORT || 8080, function() {
-	    var port = server.address().port;
-	    console.log("App now running on port ", port);
-	});	
-    }
+    // Initialize the express app.
+    var server = app.listen(process.env.PORT || 8080, function() {
+      var port = server.address().port;
+      console.log("App now running on port ", port);
+    });   
+  }
 })
