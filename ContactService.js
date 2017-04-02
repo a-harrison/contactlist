@@ -34,7 +34,12 @@ var contactService = o({
               contact: contactParameter
             },
             service: function(req) {
-              return JSON.stringify(this.getService().db.getCollection('contacts').insertObject(req.body))
+              var contact = req.body
+
+              if(contact._id)
+                contact._id = new ObjectID(contact._id)
+
+              return JSON.stringify(this.getService().db.getCollection('contacts').insertObject(contact))
             }
           }
         }),
