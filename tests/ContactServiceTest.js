@@ -95,6 +95,23 @@ __(function() {
           statusCode: 200
         }
       },
+      // Update a single contact such that it fails schema validation
+      {
+        reqSpec: {
+          url: '/api/contacts/58deedd0d604c62b368f62db',
+          method: 'PUT',
+          body: {
+            "name": "John Doe",
+            "phone" : {
+              "work" : "123-456-7890",
+              "mobile" : "123-456-7890"
+            }
+          }
+        },
+        resSpec: {
+          statusCode: 400
+        }
+      },
       // Delete contact
       {
         reqSpec: {
